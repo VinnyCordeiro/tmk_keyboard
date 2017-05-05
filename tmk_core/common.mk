@@ -1,6 +1,7 @@
 COMMON_DIR = common
 SRC +=	$(COMMON_DIR)/host.c \
 	$(COMMON_DIR)/keyboard.c \
+	$(COMMON_DIR)/matrix.c \
 	$(COMMON_DIR)/action.c \
 	$(COMMON_DIR)/action_tapping.c \
 	$(COMMON_DIR)/action_macro.c \
@@ -20,6 +21,7 @@ SRC +=	$(COMMON_DIR)/host.c \
 ifeq (yes,$(strip $(UNIMAP_ENABLE)))
     SRC += $(COMMON_DIR)/unimap.c
     OPT_DEFS += -DUNIMAP_ENABLE
+    OPT_DEFS += -DACTIONMAP_ENABLE
 else
     ifeq (yes,$(strip $(ACTIONMAP_ENABLE)))
 	SRC += $(COMMON_DIR)/actionmap.c

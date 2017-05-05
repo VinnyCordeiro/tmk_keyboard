@@ -1,5 +1,0 @@
-TARGET ?= hhkb_rn42
-CONFIG_H ?= config_rn42.h
-RN42_ENABLE ?= yes
-NKRO_ENABLE ?= no
-include Makefile

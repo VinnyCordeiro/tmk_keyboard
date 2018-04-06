@@ -68,7 +68,7 @@ The **default layer** is the base keymap layer (0-31) which is always active and
 
 Note that the `default_layer_state` variable only determines the lowest value to which `layer_state` may be set, and that `default_layer_state` is used by the core firmware when determining the starting value of `layer_state` before applying changes. In other words, the default layer will *always* be set to *on* in `layer_state`.
 
-The default layer is defined in the firmware by the `default_layer_state` variable, which is identical in format to the `layer_state` variable exlpained above. The value may be changed using the following functions:
+The default layer is defined in the firmware by the `default_layer_state` variable, which is identical in format to the `layer_state` variable explained above. The value may be changed using the following functions:
 
 - `default_layer_state_set(state)` sets the state to the specified 32-bit integer value.
 - AND/OR/XOR functions set the state based on a boolean logic comparison between the current state and the specified 32-bit integer value:
@@ -86,7 +86,7 @@ default_layer_state_set(1UL<<3);
 
 
 ### 0.2 Layer Precedence and Transparency
-Note that ***higher layers have priority in the layer stack***. The firmware starts at the topmost active layer, and works down to the bottom to find the an active keycode. Once the search encounters any keycode other than **`KC_TRNS`** (transparent) on an active layer, the search is halted and the remaining lower layers aren't examined, even if they are active.
+Note that ***higher layers have priority in the layer stack***. The firmware starts at the topmost active layer, and works down to the bottom to find an active keycode. Once the search encounters any keycode other than **`KC_TRNS`** (transparent) on an active layer, the search is halted and the remaining lower layers aren't examined, even if they are active.
 
 **Note:** a layer must be activated before it may be included in the stack search.
 
@@ -292,7 +292,7 @@ You can specify a **target layer** of action and **when the action is executed**
 
 + **layer**: `0`-`31`
 + **on**: { `ON_PRESS` | `ON_RELEASE` | `ON_BOTH` }
-+ **bits**: 4-bit value and 1-bit mask bit
++ **bits**: 5-bit: 1-bit for mask and 4-bit for operand
 
 
 #### 2.2.1 Default Layer
@@ -365,20 +365,44 @@ Turns on layer only and clear all layer on release..
 
 
 #### 2.2.10 Bitwise operation
-
-**part** indicates which part of 32bit layer state(0-7). **bits** is 5-bit value. **on** indicates when the action is executed.
+Performs bitwise operation(AND, OR, XOR, SET) against layer state.
 
     ACTION_LAYER_BIT_AND(part, bits, on)
     ACTION_LAYER_BIT_OR(part, bits, on)
     ACTION_LAYER_BIT_XOR(part, bits, on)
     ACTION_LAYER_BIT_SET(part, bits, on)
 
-These actions works with parameters as following code.
+`part` parameter indicates 0-based index(0-7) of where breaking 32-bit `layer_state` into eight nibbles(4-bit unit).
 
+bs
+
+    part            7    6    5    4    3    2    1    0
+    layer_state     0000 0000 0000 0000 0000 0000 0000 0000
+                    msb                                 lsb
+
+`bits` parameter is 5-bit value and consists of two portions, most significant bit(m) controls mask and other 4 bits(abcd) are operand of bit operation.
+
+                    43210
+    bits            mdcba
+
+These parameters works as following code.
+
+    uint32_t layer_state;
     uint8_t shift = part*4;
-    uint32_t mask = (bits&0x10) ? ~(0xf<<shift) : 0;
-    uint32_t layer_state = layer_state <bitop> ((bits<<shift)|mask);
-
+    uint32_t mask = (bits&0x10) ? ~((uint32_t)0xf<<shift) : 0;
+    switch (<bitop>) {
+    case BIT_AND:
+        layer_state = layer_state & (((bits&0xf)<<shift)|mask);
+        break;
+    case BIT_OR:
+        layer_state = layer_state | (((bits&0xf)<<shift)|mask);
+        break;
+    case BIT_XOR:
+        layer_state = layer_state ^ (((bits&0xf)<<shift)|mask);
+        break;
+    case BIT_SET:
+        layer_state = layer_state <bitop> (((bits&0xf)<<shift)|mask);
+        break;
 
 Default Layer also has bitwise operations, they are executed when key is released.
 
@@ -578,7 +602,7 @@ This registers modifier key(s) simultaneously with layer switching.
 
     ACTION_LAYER_MODS(2, MOD_LSFT | MOD_LALT)
 
-You can combine four modifiers at most but cannot use both left and right modifiers at a time, either left or right modiiers only can be allowed.
+You can combine four modifiers at most but cannot use both left and right modifiers at a time, either left or right modifiers only can be allowed.
 
 
 ## 4. Tapping

@@ -7,9 +7,10 @@ The latest source code is available here: <http://github.com/tmk/tmk_keyboard>
 
 Updates
 -------
-#### 2017/01/11
-**Sentraq S60-X specific** S60-X RGB now supported through http://qmk.sized.io configuration files, please download the proper JSON file and download the firmware from there.
+#### ~~2017/01/11~~ 2018/04/15
+**Sentraq S60-X specific** S60-X RGB now supported through http://kbfirmware.com/, just load the preset layout and start customizing it.
 
+#### 2017/01/11
 Changed action code for `ACTION_LAYER_MODS` and this may cause incompatibility with existent shared URL and downloaded firmwware of keymap editor. If you are using the action you just have to redefine it on keymap editor. Existent keymap code should not suffer.
 
 #### 2016/06/26

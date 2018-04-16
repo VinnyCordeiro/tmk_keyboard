@@ -8,10 +8,10 @@ This is only for the RGB version of the S60-X and use QMK firmware for that.
 ## Hey, where is the code???
 My coding skills are not very good, after 10+ years not programming professionaly. I was able to get around TMK, but QMK is confusing for me.
 
-That said, [Ruiqi Mao](http://www.ruiqimao.com/) made (again!) an AMAZING job making [a site to create your own custom QMK firmware for your keyboard.](http://qmk.sized.io/) Just upload the proper JSON file and you'll have a basic setup already made, just leaving for you the finer details. ANSI and ISO files should be pretty straightforward; the GENERIC file just makes all keys available on the PCB visible, as some are not used on ANSI layout and others are not used on ISO layout, namely the extra keys for JIS and HHKB layout compatibility.
+That said, [Ruiqi Mao](http://www.ruiqimao.com/) made (again!) an AMAZING job making [a site to create your own custom QMK firmware for your keyboard.](http://kbfirmware.com/) Just load the proper preset layout, leaving for you the finer details. ANSI and ISO files should be pretty straightforward; the GENERIC file just makes all keys available on the PCB visible, as some are not used on ANSI layout and others are not used on ISO layout, namely the extra keys for JIS and HHKB layout compatibility.
 
 ## But I really do prefer to code it directly!
-That's ok. You can find the QMK firmware code [here](https://github.com/jbyoung/qmk_firmware), forked from the original repo.
+That's ok. You can find the QMK firmware code [here](https://github.com/jbyoung/qmk_firmware), forked from the original repo. Or you can use [the original repository](https://github.com/qmk/qmk_firmware), the support for the S60-X RGB is also there.
 
 ## Build
 Follow QMK firmware instructions, or download the HEX file directly from http://qmk.sized.io after you are finished setting up your keyboard.

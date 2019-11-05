@@ -32,7 +32,7 @@ The recommended programs for flashing your keyboard are [FLIP](https://www.micro
 
 **Programming the firmware (Windows)**
 
-1. download and install FLIP (http://www.atmel.com/tools/FLIP.aspx)
+1. download and install FLIP (https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/FLIP)
 2. connect the keyboard, press the program button (S1) and wait until it enumerates
 3. go to device manager, find the atmega32u4 chip and click "update driver"
 4. choose location manually: folder named "usb" inside the installation directory of FLIP

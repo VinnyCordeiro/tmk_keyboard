@@ -24,7 +24,7 @@ File [S60-X_pre-compiled_firmwares.zip](S60-X_pre-compiled_firmwares.zip) contai
 
 
 ## Flashing your keyboard
-The recommended programs for flashing your keyboard are [Atmel FLIP](http://www.atmel.com/tools/FLIP.aspx) (Windows) and [dfu-programmer](http://dfu-programmer.sourceforge.net/) (Linux/Windows).
+The recommended programs for flashing your keyboard are [FLIP](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/FLIP) (Windows) and [dfu-programmer](http://dfu-programmer.sourceforge.net/) (Linux/Windows).
 
 [QMK Firmware Flasher](https://github.com/jackhumbert/qmk_firmware_flasher/releases) may work, as the S60-X keyboard uses the ATMega32U4 microcontroller, but it is untested. Use at your own risk.
 
